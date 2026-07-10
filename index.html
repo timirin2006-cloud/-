@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌍 Большое путешествие вокруг света</title>
+
+<!-- Шрифты: Fredoka — круглый "мультяшный" для заголовков, Nunito — дружелюбный для текста -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== ФОНОВЫЕ ДЕКОРАЦИИ (общие для всех экранов) ===================== -->
+  <div class="sky-bg" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="cloud cloud--1">☁️</div>
+    <div class="cloud cloud--2">☁️</div>
+    <div class="cloud cloud--3">☁️</div>
+    <div class="deco deco--balloon">🎈</div>
+    <div class="deco deco--compass">🧭</div>
+    <div class="deco deco--suitcase">🧳</div>
+    <div class="deco deco--boat">⛵</div>
+    <div class="deco deco--palm">🌴</div>
+    <div class="deco deco--star1">⭐</div>
+    <div class="deco deco--star2">✨</div>
+    <div class="world-map-strip">🗺️</div>
+  </div>
+
+  <!-- Самолёт, летящий между странами -->
+  <img src="images/plane.svg" alt="" class="flying-plane" id="flyingPlane" aria-hidden="true">
+
+  <!-- Канвас для конфетти на финальном экране -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <main id="app">
+
+    <!-- ===================== ЭКРАН 1: СТАРТ ===================== -->
+    <section class="screen screen--active" id="screen-start">
+      <div class="start-card">
+        <div class="passport-stamp passport-stamp--start">✈️ ПАСПОРТ<br>ПУТЕШЕСТВЕННИКА</div>
+        <h1 class="title-hero">🌍 Большое путешествие<br>вокруг света</h1>
+        <p class="subtitle-hero">Вспомним всё, что мы узнали за смену!</p>
+        <button class="btn btn--giant" id="btnStart">🚀 Начать путешествие</button>
+      </div>
+    </section>
+
+    <!-- ===================== ЭКРАН 2: УЧАСТНИКИ ===================== -->
+    <section class="screen" id="screen-players">
+      <h2 class="section-title">👋 Наши путешественники</h2>
+      <div class="players-grid" id="playersGrid"><!-- карточки игроков вставляются через JS --></div>
+      <button class="btn btn--giant" id="btnToGame">✈️ Полетели!</button>
+    </section>
+
+    <!-- ===================== ЭКРАН 3: ИГРА (ВОПРОСЫ) ===================== -->
+    <section class="screen" id="screen-game">
+
+      <!-- Верхняя панель: прогресс + текущая страна -->
+      <div class="game-topbar">
+        <div class="country-badge" id="countryBadge">
+          <span class="country-badge__flag" id="countryBadgeFlag">🌍</span>
+          <span class="country-badge__name" id="countryBadgeName">Страна</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label" id="progressLabel">Вопрос 1 из 30</div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Мини-табло очков -->
+      <div class="mini-scoreboard" id="miniScoreboard"></div>
+
+      <!-- Карточка вопроса -->
+      <div class="question-stage" id="questionStage">
+
+        <div class="question-card" id="questionCard">
+          <div class="question-card__topic" id="questionTopic">✅ Выбери ответ</div>
+          <div class="question-card__visual" id="questionVisual"></div>
+          <h3 class="question-card__text" id="questionText">Текст вопроса</h3>
+          <div class="options-grid" id="optionsGrid"><!-- варианты ответа через JS --></div>
+        </div>
+
+        <!-- Панель начисления очков (появляется после ответа) -->
+        <div class="scoring-panel" id="scoringPanel">
+          <p class="scoring-panel__hint">Кто ответил правильно? Нажми на игроков 👇</p>
+          <div class="scoring-buttons" id="scoringButtons"></div>
+          <button class="btn btn--ghost" id="btnNobody">🤷 Никто не ответил</button>
+          <button class="btn btn--primary" id="btnShowFact">💡 Узнать интересный факт</button>
+        </div>
+
+        <!-- Карточка интересного факта -->
+        <div class="fact-card" id="factCard">
+          <div class="fact-card__badge">💡 Интересный факт</div>
+          <p class="fact-card__text" id="factText">Факт</p>
+          <button class="btn btn--giant" id="btnNextQuestion">➡️ Следующий вопрос</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== ЭКРАН 4: ФИНАЛ ===================== -->
+    <section class="screen" id="screen-final">
+      <h2 class="final-title">🏆 Итоги путешествия</h2>
+      <p class="final-subtitle">Поздравляем наших путешественников!</p>
+
+      <div class="podium" id="podium"><!-- пьедестал через JS --></div>
+
+      <div class="final-table-wrap">
+        <table class="final-table" id="finalTable">
+          <thead>
+            <tr><th>Место</th><th>Игрок</th><th>Очки</th></tr>
+          </thead>
+          <tbody id="finalTableBody"></tbody>
+        </table>
+      </div>
+
+      <button class="btn btn--giant" id="btnRestart">🔄 Сыграть ещё раз</button>
+    </section>
+
+  </main>
+
+<script src="script.js"></script>
+</body>
+</html>
